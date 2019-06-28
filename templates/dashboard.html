@@ -1,0 +1,132 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="row">
+    <div class="input-group col-sm mb-3">
+      <input id="buscar" type="text" class="form-control" placeholder="" aria-label="Buscar" name="buscar">
+      <div class="imput-group-append">
+        <button class="btn btn-dark" type="button">Buscar</button>
+      </div>
+    </div>
+    <div class="col-sm mb-3">
+      <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target=#csv_modal>
+        Csv
+      </button>
+      <button type="button" class="btn btn-dark float-right" data-toggle="modal" data-target=#editor>
+        Nuevo
+      </button>
+    </div>
+  </div>
+
+  <div id="messages"></div>
+
+  <div id="csv_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="lbl_csv_modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 id="lbl_csv_modal" class="modal-title">Añadir libros (.csv)</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form id="csv_form" class="container" role="form">
+            <div class="form-group">
+              <label for="csv">Copia el contenido del csv</label>
+              <textarea name="csv" id="csv" class="form-control" rows="10"></textarea>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+          <button type="button" id="csv_submit_btn" class="btn btn-dark" onclick="addCsv()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editor" tabindex="-1" role="dialog" aria-labelledby="lbl_editor" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="lbl_editor">Añadir libro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <div id="validate" class="container">
+            </div>
+            <form id="editor_form" role="form" class="container">
+              <div class="d-none">
+                <input type="text" id="id_libro" class="form-control" placeholder="" value="">
+              </div>
+
+              <div class="mb-3">
+                <label for="titulo">Título (*)</label>
+                <input type="text" id="titulo" class="form-control" placeholder="" value="">
+              </div>
+
+              <div class="mb-3">
+                <label for="autor">Autor (*)</label>
+                <input type="text" id="autor" class="form-control" placeholder="" value="">
+              </div>
+
+              <div class="mb-3">
+                <label for="estatus">Estatus</label>
+                <input type="text" id="estatus" class="form-control" placeholder="" value="Disponible">
+              </div>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+          <button type="button" id="submit_btn" class="btn btn-dark" onclick="updateData()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive-md">
+    <table id="tabla" class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col" style="display: none;">id</th>
+          <th scope="col">Título</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Estatus</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entrada in datos %}
+          <tr>
+            <td style="display: none;">{{ entrada.0 }}</td>
+            <td>{{ entrada.1 }}</td>
+            <td>{{ entrada.2 }}</td>
+            <td>{{ entrada.3 }}</td>
+            <td>
+              <button type="button" class="btn btn-link" onclick="editar( {{ entrada }} )">
+                <i class="material-icons md-dark">edit</i>
+              </button>
+              <button type="button" class="btn btn-link" onclick="eliminar( {{ entrada.0 }} )">
+                <i class="material-icons md-dark">delete</i>
+              </button>
+            </td>
+          </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+
+
+{% endblock %}

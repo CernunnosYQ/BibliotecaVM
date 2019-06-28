@@ -1,0 +1,23 @@
+i {
+	vertical-align: middle !important;
+}
+
+.btn.btn-link > i.material-icons {
+	color: #2f2f2f !important;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 0;
+	padding-bottom: 0px;
+}
+
+.btn.btn-dark.float-right {
+	margin-left: 1em;
+}
+
+.ocultar {
+	display: none;
+}
+
+table {
+	overflow: scroll;
+}
