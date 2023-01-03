@@ -2,8 +2,12 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 
+import development
+
+development.setEnv()
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['Database']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['FLASK_DATABASE']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'the most secret key'
 db = SQLAlchemy(app)
@@ -85,4 +89,5 @@ def about():
     return 'About page'
 
 if __name__ == '__main__':
+    with app.app_context(): db.create_all()
     app.run(debug=True)
