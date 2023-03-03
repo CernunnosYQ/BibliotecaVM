@@ -86,7 +86,7 @@ def delete_book():
 
 @app.route('/about')
 def about():
-    return 'About page'
+    return render_template('about.html')
 
 if __name__ == '__main__':
     with app.app_context(): db.create_all()

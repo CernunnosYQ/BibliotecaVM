@@ -1,6 +1,6 @@
 # BibliotecaVM
 
-This is my first real project, is a simple personal library manager made with flask and bootstrap. Keep a registry of your books and let you made all CRUD operations.
+This was my first real project, is a simple personal library manager made with flask and bootstrap. Keep a registry of your books and let you made all CRUD operations.
 
 Originaly a live version was deployed on heroku server, now is down and I am working on a new version with more functionality and newer tecnologies.
 
