@@ -2,9 +2,9 @@ from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-import development
+import environment
 
-development.setEnv()
+environment.setEnv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['FLASK_DATABASE']
